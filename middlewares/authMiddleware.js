@@ -1,11 +1,9 @@
 import jwt from 'jsonwebtoken'
 import User from '../models/User.js'
 
-// ─── protect: Verify JWT and attach user to request ─────────────────
 export const protect = async (req, res, next) => {
   let token
 
-  // Check for token in Authorization header or cookies
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -36,7 +34,6 @@ export const protect = async (req, res, next) => {
   }
 }
 
-// ─── admin: Allow access only to admin users ─────────────────────────
 export const admin = (req, res, next) => {
   if (req.user && req.user.role === 'admin') {
     next()

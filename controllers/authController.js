@@ -1,9 +1,6 @@
 import User from '../models/User.js'
 import generateToken from '../utils/generateToken.js'
 
-// ─── @desc    Register a new user
-// ─── @route   POST /api/auth/register
-// ─── @access  Public
 export const register = async (req, res, next) => {
   try {
     const { name, email, password } = req.body
@@ -41,9 +38,6 @@ export const register = async (req, res, next) => {
   }
 }
 
-// ─── @desc    Login user and return token
-// ─── @route   POST /api/auth/login
-// ─── @access  Public
 export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body
@@ -78,9 +72,6 @@ export const login = async (req, res, next) => {
   }
 }
 
-// ─── @desc    Logout user (clear cookie)
-// ─── @route   POST /api/auth/logout
-// ─── @access  Private
 export const logout = (req, res) => {
   res.cookie('token', '', {
     httpOnly: true,
@@ -89,9 +80,6 @@ export const logout = (req, res) => {
   res.status(200).json({ success: true, message: 'Logged out successfully' })
 }
 
-// ─── @desc    Get current user profile
-// ─── @route   GET /api/auth/profile
-// ─── @access  Private
 export const getProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).select('-password')
@@ -105,9 +93,6 @@ export const getProfile = async (req, res, next) => {
   }
 }
 
-// ─── @desc    Update current user profile
-// ─── @route   PUT /api/auth/profile
-// ─── @access  Private
 export const updateProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id)
@@ -148,9 +133,6 @@ export const updateProfile = async (req, res, next) => {
   }
 }
 
-// ─── @desc    Get all users (Admin only)
-// ─── @route   GET /api/auth/users
-// ─── @access  Private/Admin
 export const getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find({}).select('-password').sort({ createdAt: -1 })
@@ -160,9 +142,6 @@ export const getAllUsers = async (req, res, next) => {
   }
 }
 
-// ─── @desc    Delete a user (Admin only)
-// ─── @route   DELETE /api/auth/users/:id
-// ─── @access  Private/Admin
 export const deleteUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id)

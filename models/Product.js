@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-// ─── Review Sub-schema ───────────────────────────────────────────────
+// Review Sub-schema 
 const reviewSchema = new mongoose.Schema(
   {
     user: {
@@ -15,7 +15,7 @@ const reviewSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-// ─── Product Schema ──────────────────────────────────────────────────
+// Product Schema
 const productSchema = new mongoose.Schema(
   {
     name: {

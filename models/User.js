@@ -43,13 +43,13 @@ const userSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // Adds createdAt and updatedAt fields
+    timestamps: true, F
   }
 )
 
-// ─── Pre-save Hook: Hash password before saving ──────────────────────
+
 userSchema.pre('save', async function (next) {
-  // Only hash if password was modified (prevents re-hashing on other updates)
+
   if (!this.isModified('password')) return next()
 
   const salt = await bcrypt.genSalt(12)
@@ -57,7 +57,6 @@ userSchema.pre('save', async function (next) {
   next()
 })
 
-// ─── Instance Method: Compare entered password with hashed password ──
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password)
 }

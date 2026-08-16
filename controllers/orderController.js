@@ -1,8 +1,5 @@
 import Order from '../models/Order.js'
 
-// ─── @desc    Create a new order
-// ─── @route   POST /api/orders
-// ─── @access  Private
 export const createOrder = async (req, res, next) => {
   try {
     const {
@@ -37,9 +34,6 @@ export const createOrder = async (req, res, next) => {
   }
 }
 
-// ─── @desc    Get a single order by ID
-// ─── @route   GET /api/orders/:id
-// ─── @access  Private
 export const getOrderById = async (req, res, next) => {
   try {
     const order = await Order.findById(req.params.id).populate('user', 'name email')
@@ -48,8 +42,6 @@ export const getOrderById = async (req, res, next) => {
       res.status(404)
       throw new Error('Order not found')
     }
-
-    // Only allow the order owner or admin to view the order
     if (
       order.user._id.toString() !== req.user._id.toString() &&
       req.user.role !== 'admin'
@@ -64,9 +56,6 @@ export const getOrderById = async (req, res, next) => {
   }
 }
 
-// ─── @desc    Get all orders for the current logged-in user
-// ─── @route   GET /api/orders/my-orders
-// ─── @access  Private
 export const getMyOrders = async (req, res, next) => {
   try {
     const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 })
@@ -76,9 +65,7 @@ export const getMyOrders = async (req, res, next) => {
   }
 }
 
-// ─── @desc    Update order to paid
-// ─── @route   PUT /api/orders/:id/pay
-// ─── @access  Private
+
 export const updateOrderToPaid = async (req, res, next) => {
   try {
     const order = await Order.findById(req.params.id)
@@ -105,9 +92,6 @@ export const updateOrderToPaid = async (req, res, next) => {
   }
 }
 
-// ─── @desc    Update order to delivered (Admin)
-// ─── @route   PUT /api/orders/:id/deliver
-// ─── @access  Private/Admin
 export const updateOrderToDelivered = async (req, res, next) => {
   try {
     const order = await Order.findById(req.params.id)
@@ -128,9 +112,6 @@ export const updateOrderToDelivered = async (req, res, next) => {
   }
 }
 
-// ─── @desc    Get all orders (Admin only)
-// ─── @route   GET /api/orders
-// ─── @access  Private/Admin
 export const getAllOrders = async (req, res, next) => {
   try {
     const orders = await Order.find({})
@@ -143,9 +124,6 @@ export const getAllOrders = async (req, res, next) => {
   }
 }
 
-// ─── @desc    Cancel an order
-// ─── @route   PUT /api/orders/:id/cancel
-// ─── @access  Private
 export const cancelOrder = async (req, res, next) => {
   try {
     const order = await Order.findById(req.params.id)

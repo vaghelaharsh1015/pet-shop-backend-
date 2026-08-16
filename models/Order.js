@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-// ─── Order Item Sub-schema ───────────────────────────────────────────
+// Order Item Sub-schema
 const orderItemSchema = new mongoose.Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId,
@@ -13,7 +13,7 @@ const orderItemSchema = new mongoose.Schema({
   quantity: { type: Number, required: true, min: 1 },
 })
 
-// ─── Shipping Address Sub-schema ─────────────────────────────────────
+// Shipping Address Sub-schema
 const shippingAddressSchema = new mongoose.Schema({
   fullName: { type: String, required: true },
   email: { type: String, required: true },
@@ -24,7 +24,7 @@ const shippingAddressSchema = new mongoose.Schema({
   country: { type: String, required: true },
 })
 
-// ─── Order Schema ────────────────────────────────────────────────────
+//  Order Schema 
 const orderSchema = new mongoose.Schema(
   {
     user: {
@@ -57,13 +57,13 @@ const orderSchema = new mongoose.Schema(
       emailAddress: { type: String },
     },
 
-    // ─── Price Breakdown ────────────────────────────────────────────
+    //  Price Breakdown 
     itemsPrice: { type: Number, required: true, default: 0 },
     shippingPrice: { type: Number, required: true, default: 0 },
     taxPrice: { type: Number, required: true, default: 0 },
     totalPrice: { type: Number, required: true, default: 0 },
 
-    // ─── Status Flags ───────────────────────────────────────────────
+    // Status Flags 
     isPaid: { type: Boolean, default: false },
     paidAt: { type: Date },
 

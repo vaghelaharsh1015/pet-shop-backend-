@@ -12,16 +12,16 @@ import { protect, admin } from '../middlewares/authMiddleware.js'
 
 const router = express.Router()
 
-// ─── Public Routes ───────────────────────────────────────────────────
+// Public Routes 
 router.post('/register', register)
 router.post('/login', login)
 router.post('/logout', logout)
 
-// ─── Protected Routes ────────────────────────────────────────────────
+//  Protected Routes 
 router.get('/profile', protect, getProfile)
 router.put('/profile', protect, updateProfile)
 
-// ─── Admin Routes ────────────────────────────────────────────────────
+//  Admin Routes 
 router.get('/users', protect, admin, getAllUsers)
 router.delete('/users/:id', protect, admin, deleteUser)
 
