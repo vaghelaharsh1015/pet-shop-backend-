@@ -1,0 +1,8 @@
+# Pet Shop Backend
+
+node_modules/
+.env
+uploads/
+*.log
+dist/
+.DS_Store
